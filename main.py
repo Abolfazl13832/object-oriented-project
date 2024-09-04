@@ -1,3 +1,4 @@
+from base import BaseClass
 from user import User
 from random import choice
 from estate import Apartment, House
@@ -54,4 +55,6 @@ if __name__ == "__main__":
         discountable = True,
         convertable = False
     )
-    print(ape2.show_detail())
+    ape2.show_detail()
+    ape2.id 
+    # print(BaseClass.object_list)
