@@ -1,4 +1,3 @@
-from base import BaseClass
 from abc import ABC, abstractmethod
 class EstateAbstract(ABC):
     def __init__(self,user,area,rooms_count,build_year,region,address,*args,**kwargs):

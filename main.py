@@ -1,69 +1,38 @@
-from base import BaseClass
-from user import User
-from random import choice
-from estate import Apartment, House
-from region import Region
-from adventisment import ApartmentSell, HouseSell
-FRIST_NAME = ['Ali','Reza','Mahdi']
-LAST_NAME = ['Alipour','Rezai','Mahdavi']
-MOBILES = ['09929399646','09149532618','09145361568' , '09143598388','09389286531']
-
+from sample import create_samples
+from adventisment import ApartmentSell,ApartmentRent,HouseSell,HouseRent,StoreSell,StoreRent
+class Handler:
+    ADVENTISEMENT_TYPE = {
+        1:ApartmentSell,
+        # 2:ApartmentRent,
+        # 3:HouseSell,
+        # 4:HouseRent,
+        # 5:StoreSell,
+        # 6:StoreRent
+    }
+    SWITCHES = {
+        'r':'get_report',
+        's':'show_all'
+    }
+    def get_report(self):
+        for adv in self.ADVENTISEMENT_TYPE.values():
+            print(adv,adv.manager.count())
+    def show_all(self):
+        for adv in self.ADVENTISEMENT_TYPE.values():
+            for obj in adv.manager.count():
+                print(obj.show_detail())
+    def run(self):
+        print("Hello world!")
+        for key in self.SWITCHES:
+            print(f"press {key} for {self.SWITCHES[key]}")
+        user_input = input("Enter your choise")
+        switch = self.SWITCHES.get(user_input,None)
+        if switch is None:
+            print("Invalid input")
+            self.run()
+        choise = getattr(self,switch,None)
+        choise()
+        self.run()
 if __name__ == "__main__":
-    for mobile in MOBILES:
-        User(choice(FRIST_NAME),choice(LAST_NAME),mobile)
-    print(User.object_list)
-
-    reg1=Region("r1")
-    ape1=ApartmentSell(
-        user=User.object_list[0],area=80,rooms_count=2,build_year=1393,
-        has_elevator=True,
-        has_parking=True,
-        floor=2,
-        region = reg1,
-        address = "some text",
-        price_per_meter = 10,
-        discountable = True,
-        convertable = False
-    )
-    reg1=Region("r1")
-    ape2=ApartmentSell(
-        user=User.object_list[0],area=80,rooms_count=2,build_year=1393,
-        has_elevator=True,
-        has_parking=True,
-        floor=2,
-        region = reg1,
-        address = "some text",
-        price_per_meter = 10,
-        discountable = True,
-        convertable = False
-    )
-    ape2.show_detail()
-    ape2.id 
-    # print(BaseClass.object_list)
-
-    reg1=Region("r1")
-    ape3=ApartmentSell(
-        user=User.object_list[0],area=80,rooms_count=2,build_year=1393,
-        has_elevator=True,
-        has_parking=True,
-        floor=2,
-        region = reg1,
-        address = "some text",
-        price_per_meter = 10,
-        discountable = True,
-        convertable = False
-    )
-#     print(f"""
-#         user---> {ape2.user.full_name}
-#         area---> {ape2.area} 
-#         rooms count---> {ape2.rooms_count}
-#         build year---> {ape2.build_year}
-#         region---> {ape2.region.name}
-#         address---> {ape2.address}
-
-# """
-#     )
-#     print(ApartmentSell.object_list)
-
-
-    
+    create_samples()
+    handler=Handler()
+    handler.run()
