@@ -1,9 +1,13 @@
 from base import BaseClass
+from base import BaseClass
 from estate import Apartment, House, Store
 from deal import Rent,Sell
 
 
 
+class ApartmentSell(BaseClass,Apartment,Sell):
+    pass
+class ApartmentRent(BaseClass,Apartment,Rent):
 class ApartmentSell(BaseClass,Apartment,Sell):
     def show_detail(self):
         self.show_description()
@@ -12,14 +16,14 @@ class ApartmentSell(BaseClass,Apartment,Sell):
 class ApartmentRent(Apartment,Rent):
     pass
 
-class HouseSell(House,Sell):
+class HouseSell(BaseClass,House,Sell):
     pass
 
-class HouseRent(House,Rent):
+class HouseRent(BaseClass,House,Rent):
     pass
 
-class StoreSell(Store,Sell):
+class StoreSell(BaseClass,Store,Sell):
     pass 
 
-class StoreRent(Store,Rent):
+class StoreRent(BaseClass,Store,Rent):
     pass
